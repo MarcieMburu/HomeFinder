@@ -1,0 +1,62 @@
+﻿@model IEnumerable<HomeFinder.Models.HouseDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="New">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HouseLocation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HousePrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HousePrice)
+            </td>
+                <td>
+                    <img src ="~/UploadedImages/@item.HouseImage" class="rounded-circle" width="40" height="40" asp-append-version ="true"/>
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HouseId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HouseId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.HouseId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
