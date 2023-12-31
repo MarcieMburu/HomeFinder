@@ -6,35 +6,39 @@ using HomeFinder.Models;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Net;
-using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Microsoft.Net.Http.Headers;
+using HomeFinder.Services;
 
 namespace HomeFinder.Controllers
 {
     public class HouseController : Controller
     {
         private readonly HomeFinderContext _context;
-       // private readonly IMapper _mapper;
+        // private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly ILogger<HouseController> _logger;
+        private readonly IUploadFilesService _uploadFilesService;
 
-        public HouseController(HomeFinderContext context, IWebHostEnvironment hostEnvironment, ILogger<HouseController> logger)
+
+        public HouseController(HomeFinderContext context, IWebHostEnvironment hostEnvironment, ILogger<HouseController> logger, IUploadFilesService uploadFilesService)
         {
             _context = context;
             _hostEnvironment = hostEnvironment;
             _logger = logger;
+            _uploadFilesService = uploadFilesService;
             // _mapper = mapper;
         }
 
         // GET: House/Create
         public IActionResult NewHouse()
         {
-          HouseDetailsViewModel houseDetailsViewModel = new HouseDetailsViewModel();
+            HouseDetailsViewModel houseDetailsViewModel = new HouseDetailsViewModel();
 
             return View();
         }
-        
-       
-        
+
+
+
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
@@ -83,76 +87,57 @@ namespace HomeFinder.Controllers
         //    return View(houseDetailsViewModel);
         //}
 
-
-        private string HouseImageUpload(HouseDetailsViewModel houseDetailsViewModel)
+        [HttpPost]
+        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
         {
-            string uniqueFileName = null;
-
-            if (houseDetailsViewModel.HouseImage != null)
+            if (files != null && files.Count > 0)
             {
-                string uploadsFolder = Path.Combine(_hostEnvironment.WebRootPath, "UploadedImages");
-                if (!Directory.Exists(uploadsFolder))
+                foreach (var file in files)
                 {
-                    Directory.CreateDirectory(uploadsFolder);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", file.FileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
                 }
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + houseDetailsViewModel.HouseImage.FileName;
-                string filepath = Path.Combine(uploadsFolder, uniqueFileName);
-                _logger.LogInformation($"Uploading file: {uniqueFileName}, Size: {houseDetailsViewModel.HouseImage.Length} bytes");
 
-                using (var fileStream = new FileStream(filepath, FileMode.Create))
-                {
-                    houseDetailsViewModel.HouseImage.CopyTo(fileStream);
-                }
-              
+                return Json(new { success = true });
             }
-            return uniqueFileName;
+
+            return Json(new { success = false });
         }
-
-
-
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> NewHouse(HouseDetailsViewModel houseDetailsViewModel)
+        public async Task<IActionResult> NewHouse(HouseDetailsViewModel houseDetailsViewModel, List<IFormFile> files)
         {
+
             if (ModelState.IsValid)
             {
+               
 
-                using (var memoryStream = new MemoryStream())
+                var houseDetails = new HouseDetails()
                 {
-                    await houseDetailsViewModel.HouseImage.CopyToAsync(memoryStream);
 
+                    HouseName = houseDetailsViewModel.HouseName,
+                    HouseDescription = houseDetailsViewModel.HouseDescription,
+                    HouseLocation = houseDetailsViewModel.HouseLocation,
+                    HousePrice = houseDetailsViewModel.HousePrice,
+                    HouseType = houseDetailsViewModel.HouseType
+                };
 
-                    if (memoryStream.Length < 2097152)
-                    {
-                        var houseDetails = new HouseDetails()
-                        {
-                            ImageName = houseDetailsViewModel.HouseImage.FileName,
-                            ImageContent = memoryStream.ToArray(),
-                            HouseName = houseDetailsViewModel.HouseName,
-                            HouseDescription = houseDetailsViewModel.HouseDescription,
-                            HouseLocation = houseDetailsViewModel.HouseLocation,
-                            HousePrice = houseDetailsViewModel.HousePrice,
-                            HouseType = houseDetailsViewModel.HouseType
-                        };
+                _context.Add(houseDetails);
+                await _context.SaveChangesAsync();
+               
 
-                        _context.Add(houseDetails);
-                        await _context.SaveChangesAsync();
-
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("File", "The file is too large");
-                    }
-                }
-                return RedirectToAction(nameof(NewHouse));
-
+                return RedirectToAction("Index");
             }
             return View();
-        
         }
+                   
+                
 
 
         public IActionResult HouseDatatable()

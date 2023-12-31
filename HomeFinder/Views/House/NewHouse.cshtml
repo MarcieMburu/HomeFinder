@@ -4,6 +4,7 @@
     ViewData["Title"] = "NewHouse";
 }
 
+
 <link rel="stylesheet" href="~/css/Style.css">
 
 <div class="split-screen-container">
@@ -13,7 +14,7 @@
 
         <div class="row">
             <div class="col-md-4 mx-auto">
-                <form asp-action="NewHouse" class="form-container" id="uploadForm" encrpt="multipart/form-data" method="post">
+                <form asp-action="NewHouse" class="form-container" id="fileUploadForm" encrpt="multipart/form-data" method="post">
                     <fieldset id="page1">
                         <legend class="form-title">House Information</legend>
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -33,20 +34,22 @@
                             <input asp-for="HouseType" class="form-control" />
                             <span asp-validation-for="HouseType" class="text-danger"></span>
                         </div>
+                      
+                        <div class="form-group">
+                            <label asp-for="HousePrice" class="control-label"></label>
+                            <input asp-for="HousePrice" class="form-control" />
+                            <span asp-validation-for="HousePrice" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group">
                             <label asp-for="HouseLocation" class="control-label"></label>
                             <input asp-for="HouseLocation" class="form-control" />
                             <span asp-validation-for="HouseLocation" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="HousePrice" class="control-label"></label>
-                            <input asp-for="HousePrice" class="form-control" />
-                            <span asp-validation-for="HousePrice" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="HouseImage" class="control-label">Upload House Images</label>
-                            <input asp-for="HouseImage" type="file" class="form-control" accept="image/*" />
-                            <span asp-validation-for="HouseImage" class="text-danger"></span>
+                            <label asp-for="HouseImages" class="control-label">Upload House Images</label>
+                            <input asp-for="HouseImages" type="file" id ="fileUpload" multiple="multiple" name="files" class="form-control" accept="image/*" />
+                            <span asp-validation-for="HouseImages" class="text-danger"></span>
 
 
                         </div>
@@ -67,33 +70,50 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 
 
         @section Scripts {
     <script>
-        window.onload = function () {
+        document.getElementById('fileUploadForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent the default form submission
 
-        document.getElementById('uploadForm').addEventListener('submit', function (e) {
-            // Prevent the form from submitting
-            e.preventDefault();
+            var form = e.target;
+            var formData = new FormData(form); // Create FormData object from the form
 
-            // Get the selected file
+            // You can append additional data to the formData if needed
+            // formData.append('additionalField', 'additionalValue');
 
-            var fileInput = document.getElementById('HouseImage');
-            console.log('File input:', fileInput);
+            // Accessing the files selected by the user
+            var files = document.getElementById('fileUpload').files;
+            for (var i = 0; i < files.length; i++) {
+                formData.append('files', files[i]); // Append each file to the FormData object
+            }
 
-            var file = fileInput.files[0];
-
-            // Log information to the console
-            console.log('Selected file:', file);
-
-            // Optionally, you can perform additional checks or actions here
-
-            // Finally, submit the form programmatically
-            this.submit();
+            // Send the form data via AJAX
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json(); // Assuming server returns JSON response
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    // Handle the successful response, if needed
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle errors here
+                    console.error('There was an error!', error);
+                });
         });
-        };
 
+      
+          
     </script>
             @{
                 await Html.RenderPartialAsync("_ValidationScriptsPartial");

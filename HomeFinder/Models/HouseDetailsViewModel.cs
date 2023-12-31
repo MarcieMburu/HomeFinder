@@ -11,8 +11,9 @@ namespace HomeFinder.Models
         public string HouseType { get; set; }
         public string HouseLocation { get; set; }
         public int HousePrice { get; set; }
+        [Required(ErrorMessage = "Please select at least one image.")]
       
-        public IFormFile HouseImage { get; set; }
+        public IList<IFormFile> HouseImages { get; set; }
        
     }
 }

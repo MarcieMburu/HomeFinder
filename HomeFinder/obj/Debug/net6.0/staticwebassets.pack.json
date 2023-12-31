@@ -5,20 +5,92 @@
       "PackagePath": "staticwebassets\\HomeFinder.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\about-banner-1.png",
+      "PackagePath": "staticwebassets\\Images\\about-banner-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\about-banner-2.jpg",
+      "PackagePath": "staticwebassets\\Images\\about-banner-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\blog-1.png",
+      "PackagePath": "staticwebassets\\Images\\blog-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\blog-2.jpg",
+      "PackagePath": "staticwebassets\\Images\\blog-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\blog-3.jpg",
+      "PackagePath": "staticwebassets\\Images\\blog-3.jpg"
+    },
+    {
       "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\cc0f9786-d084-4cc7-9bfc-0c3f436533f9.jpg",
       "PackagePath": "staticwebassets\\Images\\cc0f9786-d084-4cc7-9bfc-0c3f436533f9.jpg"
     },
     {
-      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\css\\Style.css",
-      "PackagePath": "staticwebassets\\css\\Style.css"
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\hero-banner.png",
+      "PackagePath": "staticwebassets\\Images\\hero-banner.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\logo.png",
+      "PackagePath": "staticwebassets\\Images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\property-1.jpg",
+      "PackagePath": "staticwebassets\\Images\\property-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\property-2.jpg",
+      "PackagePath": "staticwebassets\\Images\\property-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\property-3.jpg",
+      "PackagePath": "staticwebassets\\Images\\property-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\property-4.png",
+      "PackagePath": "staticwebassets\\Images\\property-4.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\service-1.png",
+      "PackagePath": "staticwebassets\\Images\\service-1.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\service-2.png",
+      "PackagePath": "staticwebassets\\Images\\service-2.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\service-3.png",
+      "PackagePath": "staticwebassets\\Images\\service-3.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\Images\\slogo.png",
+      "PackagePath": "staticwebassets\\Images\\slogo.png"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\UploadedImages\\cc0f9786-d084-4cc7-9bfc-0c3f436533f9.jpg",
+      "PackagePath": "staticwebassets\\UploadedImages\\cc0f9786-d084-4cc7-9bfc-0c3f436533f9.jpg"
     },
     {
       "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
       "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\Mercy\\source\\repos\\HomeFinder\\HomeFinder\\wwwroot\\js\\site.js",
